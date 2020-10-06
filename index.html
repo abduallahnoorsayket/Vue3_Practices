@@ -5,19 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@next"></script>
-    <title>CP</title>
+    <title>Watchers</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
 
-    <div id="computed-basics" class="demo">
-        <p>Has published books:</p>
-        <span>{{ publishedBooksMessage }}</span>
+    <div id="watch-example">
+        <p>
+            Ask a yes/no question:
+            <input v-model="question" />
+        </p>
+        <p>{{ answer }}</p>
     </div>
 
     <script src="app.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js">
     </script>
 </body>
 
