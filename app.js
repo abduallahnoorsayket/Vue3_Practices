@@ -1,32 +1,25 @@
-{ /* < script src = "https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js" > < /script> */ }
-
-{ /* <script src = "https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js" > </script> */ }
-const watchExampleVM = Vue.createApp({
+const app = Vue.createApp({
     data() {
         return {
-            question: '',
-            answer: 'Questions usually contain a question mark. ;-)'
+            currentTab: 'Home',
+            tabs: ['Home', 'Posts', 'News']
         }
     },
-    watch: {
-        // whenever question changes, this function will run
-        question(newQuestion, oldQuestion) {
-            if (newQuestion.indexOf('?') > -1) {
-                this.getAnswer()
-            }
-        }
-    },
-    methods: {
-        getAnswer() {
-            this.answer = 'Thinking...'
-            axios
-                .get('https://yesno.wtf/api')
-                .then(response => {
-                    this.answer = response.data.answer
-                })
-                .catch(error => {
-                    this.answer = 'Error! Could not reach the API. ' + error
-                })
+    computed: {
+        currentTabComponent() {
+            return 'tab-' + this.currentTab.toLowerCase()
         }
     }
-}).mount('#watch-example')
+})
+
+app.component('tab-home', {
+    template: `<div class="demo-tab">Home component</div>`
+})
+app.component('tab-posts', {
+    template: `<div class="demo-tab">Posts component</div>`
+})
+app.component('tab-news', {
+    template: `<div class="demo-tab">News component</div>`
+})
+
+app.mount('#dynamic-component-demo')

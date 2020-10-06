@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@next"></script>
-    <title>Watchers</title>
+    <title>dynamic component</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
 
-    <div id="watch-example">
-        <p>
-            Ask a yes/no question:
-            <input v-model="question" />
-        </p>
-        <p>{{ answer }}</p>
+    <div id="dynamic-component-demo" class="demo">
+        <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button', { active: currentTab === tab }]" v-on:click="currentTab = tab">
+          {{ tab }}
+        </button>
+
+        <component v-bind:is="currentTabComponent" class="tab"></component>
     </div>
 
     <script src="app.js">
