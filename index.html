@@ -5,17 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@next"></script>
-    <title>dynamic component</title>
+    <title>dynamic Cp keep alive</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
 
-    <div id="v-model-example" class="demo">
-        <p>First name: {{ firstName }}</p>
-        <p>Last name: {{ lastName }}</p>
-        <user-name v-model:first-name="firstName" v-model:last-name="lastName"></user-name>
+    <div id="dynamic-component-demo" class="demo">
+        <button v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]" @click="currentTab = tab">
+          {{ tab }}
+        </button>
+
+        <!-- Inactive components will be cached! -->
+        <keep-alive>
+            <component :is="currentTabComponent"> </component>
+        </keep-alive>
     </div>
 
     <script src="app.js">
